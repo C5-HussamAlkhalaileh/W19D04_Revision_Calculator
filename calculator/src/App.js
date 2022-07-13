@@ -7,15 +7,21 @@ import { useState } from "react";
 
 function App() {
   const [result, setResult] = useState(localStorage.getItem("result") || "");
+  // may can use for the  localstorage.clear
   const [expression, setExpression] = useState([]);
   const numbers = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
   const operations = ["-", "=", "+", "/", "x"];
+  const advoperation=["clear","nav","c"];
 
   const handleClick = (value) => {
     console.log("value: ", value);
     // const newExp = expression.push(value);
     setExpression([...expression, value]);
   };
+
+  //const deleteClick=(value)=>{
+    
+  //}
 
   // [1,-,6,*,7,7] -> 1 - 6 * 77
 
@@ -90,6 +96,25 @@ function App() {
             );
           })}
         </section>
+
+        <section className="operator">
+          {advoperation.map((advop,index)=>{
+            return(
+              <button
+                key={index}
+                onClick={()=>{
+                  advop === "c" ? handleResult() : handleClick(advop);
+                }}
+                >
+                  {advop}
+              </button>
+            )
+          })
+
+          }
+
+        </section>
+        
       </section>
     </div>
   );
